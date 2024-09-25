@@ -1,16 +1,18 @@
 import { Controller, Get, Post, Patch, Put, Delete, Param, Query, Body, Headers, Head, Ip, ParseIntPipe, DefaultValuePipe, ValidationPipe } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
+import { GetUsersParamDto } from './dtos/get-users-param.dto';
 
 @Controller('users')
 export class UsersController {
 
     //:id?는 선택이다 없어도 접근가능, :id는 필수로 필요하다
     @Get('/:id?')
-    public getUsers(@Param('id', ParseIntPipe) id: number | undefined,
+    public getUsers(
+    @Param() getUsersParamDto: GetUsersParamDto,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number){
-        console.log(limit);
-        console.log(page);
+        console.log(getUsersParamDto);
+
         return "You sent a get request to users endpoint";
     }
 

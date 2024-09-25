@@ -10,6 +10,8 @@ async function bootstrap() {
     whitelist: true,
     //whitelist와 같이 사용된다. whitelist는 dto에 정의되지 않는 속성을 자동으로 제거하지만 이것은 그런 속성이 있다면 요청 자체를 거부한다.
     forbidNonWhitelisted: true,
+    //입력되는 데이터를 dto클래스의 인스턴스로 자동변환해준다
+    transform: true,
   }))
   await app.listen(3000);
 }

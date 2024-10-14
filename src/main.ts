@@ -17,8 +17,16 @@ async function bootstrap() {
 
   /**
    * swagger 설정
+   * setTermsOfService - 이용약관 안내 문서로 하이퍼링크
    */
-  const config = new DocumentBuilder().setVersion('1.0').build();
+  const config = new DocumentBuilder()
+    .setTitle('제목설정 NestJs - Blog app API')
+    .setDescription('제목 밑 설명 추가 Use the base API URL as http://localhost:3000')
+    .setTermsOfService('http://localhost:3000/terms-of-service')
+    .setLicense('MIT License', 'MIT 라이센스 링크')
+    .addServer('http://localhost:3000')
+    .setVersion('1.0')
+    .build();
   // 문서 인스턴스화
   const document = SwaggerModule.createDocument(app, config);
   //인수3개 (기본경로 /api), (어플리케이션 자체), 문서개체

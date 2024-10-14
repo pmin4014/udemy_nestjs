@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -13,6 +14,16 @@ async function bootstrap() {
     //28강.입력되는 데이터를 dto클래스의 인스턴스로 자동변환해준다
     transform: true,
   }))
+
+  /**
+   * swagger 설정
+   */
+  const config = new DocumentBuilder().setVersion('1.0').build();
+  // 문서 인스턴스화
+  const document = SwaggerModule.createDocument(app, config);
+  //인수3개 (기본경로 /api), (어플리케이션 자체), 문서개체
+  SwaggerModule.setup('api', app, document);
+  
   await app.listen(3000);
 }
 bootstrap();
